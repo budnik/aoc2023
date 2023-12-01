@@ -12,5 +12,5 @@ dict = {
 
 lambda = ->(digit){ dict[digit]&.to_s || digit }
 
-regexp = /\d|#{Regexp.union(dict.keys)}/
-pp open('1.txt').each_line.map{first, *_, last = _1.scan(regexp);first=lambda[first]; (first+(lambda[last]||first)).to_i;  }.sum
+regexp = /(\d)|(?=(#{Regexp.union(dict.keys)}))/
+pp open('1.txt').each_line.with_index.map{first, *_, last = _1.scan(regexp).flatten.compact;first=lambda[first]; (first+(lambda[last]||first)).to_i;  }.sum
