@@ -33,16 +33,11 @@ def has_labels?(chunk, array)
 end
 
 result = array.flat_map do |l|
-
-  puts(l&.first&.y)
-  putc(?_)
   match = l.chunk { _1.match? /\d/ }
    .filter_map { _1.last if _1.first }
    .select {|chunk| has_labels?(chunk, array)}
    .map(&:join)
    .map(&:to_i)
-
-  pp match
 end.sum
 
 puts result
